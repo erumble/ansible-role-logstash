@@ -41,7 +41,7 @@
     name: logstash
     groups: root
     append: yes
-  notify: retart logstash
+  notify: restart logstash
   when: ls_elevate_user_privileges | bool
 
 - name: Logstash | Start and Enable Service
