@@ -11,6 +11,6 @@ output {
   }
 
   elasticsearch {
-    hosts => ["{{ es_hosts | join(',') }}"]
+    hosts => [{{ '\"' + es_hosts | join('\",\"') + '\"' }}]
   }
 }
