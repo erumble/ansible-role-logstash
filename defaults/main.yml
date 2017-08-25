@@ -9,7 +9,7 @@ ls_data_path: /var/lib/logstash
 ls_config_path: /etc/logstash/conf.d
 ls_log_path: /var/log/logstash
 ls_network_host: 127.0.0.1
-ls_http_port: 9600-9700
+ls_http_port: 9600
 ls_elevate_user_privileges: no
 ls_collect_system_logs: no
 es_hosts:
