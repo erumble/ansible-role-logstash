@@ -1,0 +1,16 @@
+---
+# Elastic repo
+ls_yum_repo_baseurl: https://artifacts.elastic.co/packages/5.x/yum
+ls_yum_repo_gpgkey: https://artifacts.elastic.co/GPG-KEY-elasticsearch
+
+# Logstash configuration
+ls_node_name: "{{ inventory_hostname }}"
+ls_data_path: /var/lib/logstash
+ls_config_path: /etc/logstash/conf.d
+ls_log_path: /var/log/logstash
+ls_network_host: 127.0.0.1
+ls_http_port: 9600-9700
+ls_elevate_user_privileges: no
+ls_collect_system_logs: no
+es_hosts:
+  - 'localhost:9200'

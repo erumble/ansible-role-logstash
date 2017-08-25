@@ -1,0 +1,56 @@
+---
+- name: Logstash | Add GPG Key
+  rpm_key:
+    key: "{{ ls_yum_repo_gpgkey }}"
+    state: present
+
+- name: Logstash | Add Repository
+  template:
+    src: elastic.repo.j2
+    dest: /etc/yum.repos.d/elastic.repo
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Logstash | Install Packages
+  package:
+    name: logstash
+    state: present
+
+- name: Logstash | Configure Service
+  template:
+    src: logstash.yml.j2
+    dest: /etc/logstash/logstash.yml
+    owner: logstash
+    group: logstash
+    mode: 0660
+  notify: restart logstash
+
+- name: Logstash | Collect System Logs
+  template:
+    src: syslog.conf.j2
+    dest: /etc/logstash/conf.d/10-syslog.conf
+    owner: logstash
+    group: logstash
+    mode: 0660
+  notify: restart logstash
+  when: ls_collect_system_logs | bool
+
+- name: Logstash | Add logstash User to root Group
+  user:
+    name: logstash
+    groups: root
+    append: yes
+  notify: retart logstash
+  when: ls_elevate_user_privileges | bool
+
+- name: Logstash | Start and Enable Service
+  service:
+    name: logstash
+    state: started
+    enabled: yes
+
+- name: Logstash | Ensure Service is Running
+  wait_for:
+    port: "{{ ls_http_port }}"
+    delay: 3
