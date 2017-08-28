@@ -28,7 +28,7 @@
 
 - name: Logstash | Collect Own Logs
   template:
-    src: syslog.conf.j2
+    src: logstash.conf.j2
     dest: /etc/logstash/conf.d/10-logstash.conf
     owner: logstash
     group: logstash
