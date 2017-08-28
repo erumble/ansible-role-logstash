@@ -19,9 +19,7 @@ IcedTea OpenJDK 1.8.0.91+
 `ls_config_path` | `/etc/logstash/conf.d`
 `ls_log_path` | `/var/log/logstash`
 `ls_network_host` | `127.0.0.1`
-`ls_http_port` | `9600-9700`
-`ls_elevate_user_privileges` | `no`
-`ls_collect_system_logs` | `no`
+`ls_http_port` | `9600`
 `es_hosts` | `- 'localhost:9200'`
 
 ## Usage

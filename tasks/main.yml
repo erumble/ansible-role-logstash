@@ -26,23 +26,14 @@
     mode: 0660
   notify: restart logstash
 
-- name: Logstash | Collect System Logs
+- name: Logstash | Collect Own Logs
   template:
     src: syslog.conf.j2
-    dest: /etc/logstash/conf.d/10-syslog.conf
+    dest: /etc/logstash/conf.d/10-logstash.conf
     owner: logstash
     group: logstash
     mode: 0660
   notify: restart logstash
-  when: ls_collect_system_logs | bool
-
-- name: Logstash | Add logstash User to root Group
-  user:
-    name: logstash
-    groups: root
-    append: yes
-  notify: restart logstash
-  when: ls_elevate_user_privileges | bool
 
 - name: Logstash | Start and Enable Service
   service:
