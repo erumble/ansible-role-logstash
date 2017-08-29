@@ -1,7 +1,16 @@
 input {
   file {
-    type => "syslog"
+    type => "logstash"
     path => [ "{{ ls_log_path }}/*.log" ]
+  }
+}
+
+filter {
+  if [type] == "logstash" {
+    grok {
+      match => { "message" => "\[%{DATA:event_time}\]\[%{DATA:event_level} *\]\[%{DATA:event_source} *\]%{JAVALOGMESSAGE:message}" }
+      overwrite => [ "message" ]
+    }
   }
 }
 
